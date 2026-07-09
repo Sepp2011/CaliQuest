@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CaliQuest v0.2</title>
+<style>
+body{margin:0;background:#10131a;color:#fff;font-family:Arial}
+.wrap{max-width:420px;margin:30px auto;padding:18px}
+.card{background:#1c2230;border-radius:16px;padding:20px}
+.btn{display:block;width:100%;margin:10px 0;padding:14px;border:none;border-radius:10px;background:#2ecc71;color:#fff;font-size:18px}
+.progress{height:14px;background:#333;border-radius:99px;overflow:hidden}.fill{height:100%;background:#2ecc71;width:0}
+#levels{display:none}.lvl{padding:12px;margin:8px 0;border-radius:10px;background:#2b3244}.locked{opacity:.4}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card" id="menu">
+<h1>🏆 CaliQuest</h1>
+<p>👤 <b>Sepp2011</b></p>
+<p>🎖️ Rookie I</p>
+<p>⭐ XP: <span id="xp">0</span>/100</p>
+<div class="progress"><div class="fill" id="fill"></div></div>
+<button class="btn" onclick="openLevels()">▶ Spielen</button>
+<button class="btn">🌳 Skill Tree (bald)</button>
+<button class="btn">🏆 Achievements (bald)</button>
+</div>
+
+<div class="card" id="levels">
+<h2>🗺️ Levelkarte</h2>
+<div class="lvl">🟢 Level 1 <button onclick="finish1()">Abschließen</button></div>
+<div class="lvl locked">🔒 Level 2</div>
+<div class="lvl locked">🔒 Level 3</div>
+<div class="lvl locked">👑 Boss Level 5</div>
+<button class="btn" onclick="back()">⬅ Zurück</button>
+</div>
+</div>
+<script>
+let xp=Number(localStorage.getItem("cqxp")||0);
+function draw(){xp=Math.min(xp,100);xpEl.textContent=xp;fill.style.width=xp+"%";}
+const xpEl=document.getElementById("xp"),fill=document.getElementById("fill");
+draw();
+function openLevels(){menu.style.display="none";levels.style.display="block";}
+function back(){levels.style.display="none";menu.style.display="block";}
+function finish1(){xp=Math.min(100,xp+20);localStorage.setItem("cqxp",xp);draw();alert("🎉 Level 1 geschafft! In Version 0.3 wird Level 2 wirklich freigeschaltet.");}
+</script>
+</body></html>
